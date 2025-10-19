@@ -39,7 +39,6 @@ class ArticleController extends Controller
         $data['slug'] = Str::slug($request->title);
         $data['status'] = $request->status ?? 'draft';
 
-        // upload thumbnail
         if ($request->hasFile('thumbnail')) {
             
             $image = $request->file('thumbnail');
@@ -94,15 +93,12 @@ class ArticleController extends Controller
             $data['thumbnail'] = "thumbnails/".$imageName;
         }
 
-        // Ambil semua gambar lama
         preg_match_all('/src="([^"]+)"/i', $article->body, $oldMatches);
         $oldImages = $oldMatches[1] ?? [];
 
-        // Ambil semua gambar baru dari request
         preg_match_all('/src="([^"]+)"/i', $request->body, $newMatches);
         $newImages = $newMatches[1] ?? [];
 
-        // Cari gambar yang dihapus (ada di lama tapi tidak ada di baru)
         $deletedImages = array_diff($oldImages, $newImages);
 
         foreach ($deletedImages as $fileUrl) {

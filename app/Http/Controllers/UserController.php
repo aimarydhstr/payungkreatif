@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Tampilkan daftar user.
-     */
     public function index(Request $request)
     {
         $users = User::latest()->get();
@@ -18,9 +15,6 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    /**
-     * Simpan user baru.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,9 +38,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User berhasil dibuat!');
     }
 
-    /**
-     * Update user.
-     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -77,9 +68,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User berhasil diperbarui!');
     }
 
-    /**
-     * Hapus user.
-     */
     public function destroy($id)
     {
         $user = User::findOrFail($id);

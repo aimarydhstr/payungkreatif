@@ -45,7 +45,7 @@
   }
 </style>
 
-<div class="row gx-4">
+<div class="row gx-4" id="sec1">
   <!-- left hero -->
   <div class="col-lg-8">
     <div class="position-relative">
@@ -152,7 +152,7 @@
 </div>
 
 <!-- Premium Section -->
-<section class="premium-section container mt-5">
+<section class="premium-section container mt-5" id="sec2">
   <div class="text-center mb-4">
     <h2>Premium Stories</h2>
     <p>Temukan artikel hukum komprehensif dari Payung Kreatif!</p>
@@ -205,7 +205,7 @@
 </section>
 
 <!-- sections below: Pusat Data & Legal Analysis -->
-<div class="row mt-5 gx-4 pusat-section">
+<div class="row mt-5 gx-4 pusat-section" id="sec3">
   <div class="col-lg-8">
     <div class="d-flex justify-content-between align-items-start mb-3">
       <div>
@@ -261,7 +261,7 @@
   </div>
 </div>
 
-<section class="hero d-flex flex-column flex-lg-row align-items-start justify-content-between mt-5">
+<section class="hero d-flex flex-column flex-lg-row align-items-start justify-content-between mt-5" id="sec4">
   <div class="hero-text me-lg-5">
     <span class="badge">Payung Kreatif AI</span>
     <h3>AI-Powered. Gratis. Selalu Siap Membantu</h3>

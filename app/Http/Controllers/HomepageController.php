@@ -53,14 +53,10 @@ class HomepageController extends Controller
     }
     
     public function tag($slug)
-    {        
-        // Ambil tag berdasarkan slug
+    {
         $tagItem = Tag::where('slug', $slug)->firstOrFail();
-
-        // Ambil semua tag untuk sidebar/filter
         $allTag = Tag::orderBy('name')->get();
 
-        // Ambil artikel yang punya relasi dengan tag ini
         $articles = Article::with(['author', 'tags'])
             ->where('status', 'published')
             ->whereHas('tags', function ($query) use ($tagItem) {

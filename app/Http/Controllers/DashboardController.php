@@ -29,13 +29,11 @@ class DashboardController extends Controller
     
     public function expert()
     {
-        // Statistik ringkasan
         $totalChats = Chat::count();
         $totalAIChats = Chat::where('role', 'ai')->count();
         $totalExpertChats = Chat::where('role', 'expert')->count();
         $totalUserChats = Chat::where('role', 'user')->count();
 
-        // Status AI chat untuk chart
         $aiStatusCounts = Chat::where('role', 'ai')
             ->selectRaw("status, COUNT(*) as count")
             ->groupBy('status')
@@ -48,7 +46,6 @@ class DashboardController extends Controller
             'approved' => 0,
         ], $aiStatusCounts);
 
-        // List AI chat terbaru
         $latestAIChats = Chat::where('role', 'ai')
             ->latest()
             ->take(5)

@@ -10,21 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    // Index page: list AI chat need_review + modal untuk koreksi
     public function index()
     {
         $aiChats = Chat::where('role', 'ai')
             ->where('status', 'need_review')
-            ->with('case.chats', 'case') // ambil semua chat dalam case
+            ->with('case.chats', 'case')
             ->latest()
             ->get();
 
-        // Persiapkan data: setiap AI chat, cari pertanyaan user relevan
         $chats = $aiChats->map(function ($aiChat) {
             $userChat = $aiChat->case->chats
                 ->where('role', 'user')
                 ->filter(fn($c) => $c->id < $aiChat->id)
-                ->last(); // user chat terakhir sebelum AI chat
+                ->last();
 
             return (object) [
                 'id' => $aiChat->id,
@@ -40,7 +38,6 @@ class ReviewController extends Controller
         return view('reviews.index', compact('chats'));
     }
 
-    // Simpan jawaban pakar dari modal
     public function store(Request $request, $chat_id)
     {
         $request->validate([
@@ -51,7 +48,6 @@ class ReviewController extends Controller
 
         $aiChat = Chat::findOrFail($chat_id);
 
-        // Simpan jawaban pakar sebagai chat baru
         Chat::create([
             'case_chat_id' => $aiChat->case_chat_id,
             'user_id' => Auth::id(),
@@ -61,7 +57,6 @@ class ReviewController extends Controller
             'status' => 'approved',
         ]);
 
-        // Update status AI chat
         $aiChat->status = 'approved';
         $aiChat->save();
 
@@ -73,9 +68,7 @@ class ReviewController extends Controller
             'status' => 'approved',
         ]);
 
-        // Simpan ke Knowledge Base jika dicentang
         if ($request->add_to_kb) {
-            // Ambil pertanyaan user relevan
             $userChat = $aiChat->case->chats
                 ->where('role', 'user')
                 ->filter(fn($c) => $c->id < $aiChat->id)
@@ -119,7 +112,7 @@ class ReviewController extends Controller
                 ->filter(fn($c) => $c->id < $aiChat->id)
                 ->last();
 
-            $review = $aiChat->review; // karena sudah di-load dengan with()
+            $review = $aiChat->review; 
 
             return (object) [
                 'id' => $aiChat->id,

@@ -352,9 +352,9 @@
         <!-- Nav links -->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="{{ route('homepage') }}">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Solusi</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Info Hukum</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Event & Awards</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('homepage').'#sec2' }}">Premium Stories</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('homepage').'#sec3' }}">Pusat Data</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('homepage').'#sec4' }}">PayungKreatif AI</a></li>
         </ul>
 
         <!-- Auth buttons -->

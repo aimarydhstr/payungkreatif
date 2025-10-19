@@ -40,7 +40,6 @@ class ConsultChatController extends Controller
         return view('consults.chat', compact('chats', 'user'));
     }
 
-    // Kirim pesan
     public function store(Request $request, $expertId)
     {
         $request->validate([

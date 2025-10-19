@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Show register form
     public function showRegister()
     {
         return view('auth.register');
     }
 
-    // Process register
     public function register(Request $request)
     {
         $request->validate([
@@ -39,13 +37,11 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil!');
     }
 
-    // Show login form
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // Process login
     public function login(Request $request)
     {
         $request->validate([
@@ -77,7 +73,6 @@ class AuthController extends Controller
         ]);
     }
 
-    // Logout
     public function logout(Request $request)
     {
         Auth::logout();
